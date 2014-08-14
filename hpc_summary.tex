@@ -37,13 +37,13 @@
 
 \section{Amdahl \& Gustafson}
 
-\begin{tabular}{ l | c c c }
+\begin{tabular}{ l l | c c }
 
-	& \textbf{General} & \textbf{Amdahl's Law} & \textbf{Gustafson's Law} \\
-	&	  & \textit{strong scaling}	& \textit{weak scaling} \\
+	&  & \textbf{Amdahl's Law} & \textbf{Gustafson's Law} \\
+	&	 & \textit{strong scaling}	& \textit{weak scaling} \\
 	\hline
-	Speedup \( S_p(N) \)  & \( \frac{T(1)}{T(N)} \) & \( \frac{1}{S + \frac{1 - S}{N}} \) & \( Np + s \) \\
-	Efficency \( \varepsilon_p(N) \) & \( \frac{S_p(N)}{N} = \frac{T(1)}{N \cdot T(N)} \) & \( \frac{1}{s(N-1) + 1} \) & \( \frac{1 - p}{N} \) \\
+	\textbf{Speedup} & \( S_p(N) = \frac{T(1)}{T(N)} \) & \( \frac{1}{s + \frac{1 - s}{N}} \xrightarrow{N \rightarrow \infty} \frac{1}{s} \) & \( Np + s \xrightarrow{N \rightarrow \infty} \infty \) \\
+	\textbf{Efficency} & \( \varepsilon_p(N) = \frac{S_p(N)}{N} \) & \( \frac{1}{s (N-1) + 1} \xrightarrow{N \rightarrow \infty} 0 \) & \( \frac{1 - p}{N} + p \xrightarrow{N \rightarrow \infty} p \) \\
 \end{tabular}
 
 \section{Moore's Law}
@@ -75,7 +75,7 @@
 	Stages & $m$ \\
 	Operations & $N$ \\
 	Without pipeline & \( T_{seq} = m \cdot N \) \\
-	With pipeline & \( T_{pipe} = N + m − 1 \) \\
+	With pipeline & \( T_{pipe} = N + m - 1 \) \\
 	Speedup & \(S_{pipe} = \frac{m}{1 + \frac{m-1}{N}} \xrightarrow{N \rightarrow \infty} m \) \\
 	Throughput (results/cycle) & \( \frac{N}{T_{pipe}} = \frac{1}{1 + \frac{m-1}{N}} \xrightarrow{N \rightarrow \infty} 1 \) \\
 \end{tabular}
@@ -104,14 +104,13 @@
 \begin{tabular}{l | c c c c }
 	\textbf{Topology} & \textbf{Max degree} & \textbf{Edge connectivity} & \textbf{Diameter} & \textbf{Bisection BW} \\
 	\hline
-	Bus		& 1  & 1   & 1 & B \\
-	Ring		& 2  & 2   & \( \lfloor \frac{N}{2} \rfloor \) & 2B \\
-	Fully connected	& \( \frac{N(N-1)}{2} \) & N-1 & 1 & \( \frac{N^2}{4} \) \\ 
+	Bus		& $1$  & $1$ & $1$ & $B$ \\
+	Ring	& $2$  & $2$ & $\lfloor \frac{N}{2} \rfloor$ & $2B$ \\
+	Fully connected	& $N-1$ & $N-1$ & $1$ & $\frac{N^2}{4}$ \\ 
 	Sw. Fat Tree	& 1 w/o redunancy & depends on design & 2 hierarchy height & depends on design \\
-	Mesh		& 2d & d   & \( \sum_{i=1}^d (N_i - 1) \) & \( B ( \prod_{i=1}^{d-1} N_i ) \) \\
-	Torus		& 2d & 2d  & \( \sum_{i=1}^d \lfloor \frac{N}{2} \rfloor  \) & \( 2B ( \prod_{i=1}^{d-1} N_i ) \) \\
-
-	Hypercube	& d  & d   & d & \( B2^{d-1} \) \\ 
+	Mesh	& $2d$ & $d$ & $\sum_{i=1}^d (N_i - 1)$ & $B ( \prod_{i=1}^{d-1} N_i )$ \\
+	Torus	& $2d$ & $2d$ & $\sum_{i=1}^d \lfloor \frac{N}{2} \rfloor$ & $2B ( \prod_{i=1}^{d-1} N_i )$ \\
+	Hypercube	& $d$ & $d$ & $d$ & $B2^{d-1}$ \\ 
 \end{tabular}
 
 \section{Balance, Lightspeed}
