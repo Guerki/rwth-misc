@@ -629,14 +629,17 @@ See \texttt{man bsub}.
 \subsection{Basic optimization techniques for serial code}
 
 \begin{description}[style=nextline]
-	\item[What is a hot spot?] A part of the code where a dominant fraction of the execution time is spent.
+	\item[What is a hot spot?]
+        A part of the code where a dominant fraction of the execution 
+        time is spent.
 
-	\item[What kind of trigger mechanisms do exist?] Event-driven and trigger-driven.
+	\item[What kind of trigger mechanisms do exist?]
+        Event-driven and trigger-driven.
 
 	\begin{description}[style=nextline]
-		\item[What is the difference between event-driven and sample-driven triggers?] \textbf{Event}-driven
-			triggers count accuratly every occurance by using instrumentation or PMCs => probably high overhead. \
-		\textbf{Sample}-driven triggers save the state/PC at periodic times => constant overhead.
+		\item[What is the difference between event-driven and sample-driven triggers?]
+            \textbf{Event}-driven triggers count accurately every occurrence by using instrumentation or PMCs => probably high overhead.
+    		\textbf{Sample}-driven triggers save the state/PC at periodic times => constant overhead.
 
 		\item[What is instrumentation?] Instrumentation is used to trigger events during
 			runtime by putting additional instructions in an existing program.
@@ -646,13 +649,13 @@ See \texttt{man bsub}.
 	\item[What kind of recording mechanisms do exist?] Profiling and Tracing.
  
 	\begin{description}[style=nextline]
-		\item[What is the difference between profiling and tracing?] Profiling summaries information about
-			the runtime spent per routine/line/block. Tracing collects call-paths
-			with timing information and is therefore much more detailed.
+		\item[What is the difference between profiling and tracing?] 
+            Profiling summarises information about the runtime spent per routine/line/block. 
+            Tracing collects call-paths with timing information and is therefore much more detailed.
 
 	\end{description}
-	\item[What can hardware performance counter measure?] PMCs are MSRs/hw-counters to measure processor
-		events like cache/branch-misses, loads/stores and much more.
+	\item[What can hardware performance counter measure?]
+        PMCs are MSRs/hw-counters to measure processor events like cache/branch-misses, loads/stores and much more.
 
 	\item[What are basic single-core optimizations?]
 	\begin{itemize}
@@ -670,19 +673,19 @@ See \texttt{man bsub}.
 		\item[What are simple loop optimizations?] Break-out the loop as soon as possible.
 			Jam neighbouring loops.
 
-		\item[How to avoid expensive operations?] Use precalculated tables for fast lookup of results.
+		\item[How to avoid expensive operations?] Use pre-calculated tables for fast lookup of results.
  
 		\item[What to consider with data types?] Aligning is important. Take care when using SIMD.
  
 		\item[How can temporary variables increase performance?] They can be kept in registers and
-			therefore reduce the memory transations.
+			therefore reduce the memory transactions.
  
 		\item[Can vectorization help for memory-bound programs?] No.
  
 		\item[What is the role of the compiler?] Register usage, inlining, general optimizations
  
 		\item[What are problems with C++ codes?] Avoid frequent (de)allocation,
-			use static varibales whenever possible, avoid using to much abstraction.
+			use static variables whenever possible, avoid using to much abstraction.
  
 	\end{description}
 \end{description}
@@ -691,11 +694,16 @@ See \texttt{man bsub}.
 \subsection{Data access optimization}
 
 \begin{description}[style=nextline]
-	\item[What can be modelled with the balance metric?] Ratio of memory bandwidth \[Words/s\] to peak
-		performance \[Flops/s\].
+	\item[What can be modelled with the balance metric?] 
+        Machine balance: Ratio of memory bandwidth \[Words/s\] to peak
+        performance \[Flops/s\].\\
+        Code balance: data transfers per arithmetic operations
+        $\Longrightarrow$ requirement of the code. \\
+        Lightspeed: expected fraction of peak performance = ratio of machine
+        balance to code balance.  
 
 	\begin{description}[style=nextline]
-		\item[How are lightspeed, machine and code balance defined?] See formulars.
+		\item[How are lightspeed, machine and code balance defined?] See formulas.
 
 		\item[How can we get values for lightspeed, machine and code balance?] Count \# of
 			load/stores and arithmetic operations per loop iteration.
@@ -709,7 +717,7 @@ See \texttt{man bsub}.
 
 	\begin{description}[style=nextline]
 		\item[Which algorithm types have potential for optimizations?] Memory-bound usually not so much.
-			Take care for computate-bound problems: \( \frac{O(N^3)}{O(N^2)} \).
+			Take care for compute-bound problems: \( \frac{O(N^3)}{O(N^2)} \).
 
 		\item[Which optimizations should be applied?] Loop unrolling, jamming and blocking.
 	\end{description} 
@@ -720,7 +728,7 @@ See \texttt{man bsub}.
 		\item[How can sparse matrices be stored and why?] Compressed row storage (CRS): store only
 			non-zero entries by using additional index- and row-pointer- arrays.
 
-		\item[How is the sparse matrix-vector multiply computed and optimized?] Workingset shrinking by
+		\item[How is the sparse matrix-vector multiply computed and optimized?] Working set shrinking by
 			using CRS, loop unrolling, etc..
 	\end{description}
 \end{description}
